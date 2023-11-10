@@ -4,6 +4,7 @@ import path from 'path';
 import methodOverride from 'method-override';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+
 // import productRouter from './routes/product.route.js';
 import { productRouter } from './routes/index.js';
 
