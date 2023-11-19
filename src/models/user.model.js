@@ -111,7 +111,7 @@ const userSchema = new Schema(
         },
         role: {
             type: String,
-            enum: ["customer" , "seller"],
+            enum: ["customer", "seller"],
             default: "customer"
         }
     },
@@ -131,13 +131,13 @@ userSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-userSchema.methods.generateAccessToken = async function (){
+userSchema.methods.generateAccessToken = async function () {
     return jwt.sign(
         {
             _id: this._id,
             username: this.username,
             first: this.first,
-            last : this.last,
+            last: this.last,
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
@@ -146,7 +146,7 @@ userSchema.methods.generateAccessToken = async function (){
     )
 }
 
-userSchema.methods.generateRefreshToken = async function (){
+userSchema.methods.generateRefreshToken = async function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -159,4 +159,6 @@ userSchema.methods.generateRefreshToken = async function (){
     )
 }
 
-export const User = mongoose.model('User' , userSchema);
+const User = mongoose.model('User', userSchema);
+
+export default User; 

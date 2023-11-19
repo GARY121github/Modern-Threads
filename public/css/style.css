@@ -1,132 +1,139 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-header{
-    margin-bottom: 4.5em;
+header {
+  margin-bottom: 4.5em;
 }
 .nav-bar {
-    position : fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* gap: 10px; */
-    padding: 0.4em;
-    background: white;
-    /* background-color: yellowgreen; */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* gap: 10px; */
+  padding: 0.4em;
+  background: white;
+  z-index: 10 !important;
+  /* background-color: yellowgreen; */
 }
 
 .nav-bar button {
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: none;
-    background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
 }
 
 .nav-bar ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    width: 20%;
-    align-self: end;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+  align-self: end;
 }
 
 .nav-bar ul li a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.2rem;
-    font-weight: normal;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: normal;
 }
 
 .nav-bar ul li:hover a {
-   color: blue;
+  color: blue;
 }
 
 .nav-bar form {
-    display: flex;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 2em;
-    background: lightgray;
-    padding: 0.5em;
-    width: 45%;
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 2em;
+  background: lightgray;
+  padding: 0.5em;
+  width: 45%;
 }
 
 .nav-bar form input {
-    padding: 0.5em;
-    outline: none;
-    border: none;
-    width: 100%;
-    background: transparent;
+  padding: 0.5em;
+  outline: none;
+  border: none;
+  width: 100%;
+  background: transparent;
 }
 
-.nav-bar div{
-    display : flex;
-    gap: 1.4em;
+.nav-bar div {
+  display: flex;
+  gap: 1.4em;
+  cursor: pointer;
 }
 
 #sup-item {
-    background: red;
-    color: black;
-    border-radius: 50%;
-    padding: 0.2em 0.5em;
-    font-weight: bold;
+  background: red;
+  color: black;
+  border-radius: 50%;
+  padding: 0.2em 0.5em;
+  font-weight: bold;
 }
-
 
 /* Your existing CSS... */
 
 .nav-bar .toggle-button {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 24px;
-    height: 20px;
-    cursor: pointer;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .nav-bar .toggle-button span {
-    width: 24px;
-    height: 4px;
-    background: black;
-    display: block;
-    border-radius: 2px;
-    transition: 0.3s;
+  width: 24px;
+  height: 4px;
+  background: black;
+  display: block;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.product-img {
+  width: 295px;
+  height: 298px;
+  border-radius: 20px;
 }
 
 @media (max-width: 768px) {
-    .nav-bar ul {
-        display: none;
-    }
+  .nav-bar ul {
+    display: none;
+  }
 
-    .nav-bar .toggle-button {
-        display: flex;
-    }
+  .nav-bar .toggle-button {
+    display: flex;
+  }
 
-    .nav-bar.active ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: yellowgreen;
-        position: absolute;
-        top: 50px;
-        right: 0;
-        width: 100%;
-    }
+  .nav-bar.active ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: yellowgreen;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100%;
+  }
 
-    .nav-bar.active ul li {
-        margin: 10px 0;
-    }
+  .nav-bar.active ul li {
+    margin: 10px 0;
+  }
 
-    .nav-bar.active .toggle-button span {
-        background: white;
-    }
+  .nav-bar.active .toggle-button span {
+    background: white;
+  }
 }

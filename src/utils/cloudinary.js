@@ -11,29 +11,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-/**
- * Creates a folder on Cloudinary with the specified name.
- *
- * @returns {Promise<Object>} A promise that resolves to the created folder object.
- * @throws {Error} If folder creation fails.
- */
-const createCloudinaryFolder = async () => {
-    try {
-        cloudinary.api.create_folder(CLOUDINARY_FOLDER_NAME);
-        console.log("FOLDER CREATED SUCCESSFULLY :: ");
-    }
-    catch (error) {
-        console.error("FOLDER CREATION FAILED :: ", error.message);
-        throw error;
-    }
-}
 
-/**
- * Uploads an image to Cloudinary from the specified local path.
- *
- * @param {string} imagePath - The local path of the image to be uploaded.
- * @returns {Promise<Object|null>} A promise that resolves to the uploaded image object or null if upload fails.
- */
 const uploadImage = async (imagePath) => {
     try {
         if (!imagePath) {
@@ -43,11 +21,12 @@ const uploadImage = async (imagePath) => {
 
         // Upload image to Cloudinary
         const uploadResponse = await cloudinary.uploader.upload(imagePath, {
+            folder: CLOUDINARY_FOLDER_NAME,
             resource_type: "image",
         });
 
         console.log("IMAGE UPLOADED SUCCESSFULLY :: ", uploadResponse.url);
-        return uploadResponse;
+        return uploadResponse.url;
     }
     catch (error) {
         console.log("IMAGE UPLOAD FAILED :: ", error);
@@ -60,6 +39,5 @@ const uploadImage = async (imagePath) => {
 }
 
 export {
-    createCloudinaryFolder,
     uploadImage
 };
