@@ -17,7 +17,8 @@
             <div class="row p-3">
                 <% for(Product of Products){ %>
                     <div class="col-sm-3 mb-2">
-                        <div class="card" style="border: none;">
+                        <div class="card product-card" style="border: none;"
+                            onclick="location.href='/product/<%= Product._id %>'">
                             <img src="<%=Product.image%>" class="product-img mb-3" alt="...">
                             <h3 class="text-start">
                                 <%=Product.name%>
@@ -39,13 +40,14 @@
         <button class="border border-black p-2 rounded-pill mx-auto" style="width: 9em; display: block;">view all</h1>
     </section>
 
-    <section class="mt-3 mb-3 pb-5 border-bottom">
+    <section class="mt-3 mb-3 pb-5">
         <h1 class="text-center p-2 fw-bolder">TOP SELLING</h1>
         <div class="container text-center">
             <div class="row p-3">
                 <% for(Product of Products){ %>
                     <div class="col-sm-3 mb-2">
-                        <div class="card" style="border: none;">
+                        <div class="card product-card" style="border: none;"
+                            onclick="location.href='/product/<%= Product._id %>'">
                             <img src="<%=Product.image%>" class="product-img mb-3" alt="...">
                             <h3 class="text-start">
                                 <%=Product.name%>

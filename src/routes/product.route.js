@@ -15,7 +15,7 @@ router.get('/create', async (req, res) => {
 })
 
 router.post('/create', upload.single('image'), async (req, res) => {
-    
+
     // upload the image to cloudinary
     const image = await uploadImage(req.file.path);
 
@@ -24,6 +24,12 @@ router.post('/create', upload.single('image'), async (req, res) => {
 
     res.redirect('/');
 });
+
+router.get('/product/:id', async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    res.render('products/showProduct', { product });
+})
 
 
 export default router;

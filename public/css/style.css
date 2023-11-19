@@ -54,7 +54,7 @@ header {
 .nav-bar form {
   display: flex;
   align-items: center;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 2em;
   background: lightgray;
   padding: 0.5em;
@@ -101,6 +101,10 @@ header {
   display: block;
   border-radius: 2px;
   transition: 0.3s;
+}
+
+.product-card{
+  cursor: pointer;
 }
 
 .product-img {
