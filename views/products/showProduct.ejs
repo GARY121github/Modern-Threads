@@ -70,47 +70,68 @@
             </li>
         </ul>
 
-        <div id="product-details-section" style="display: none">
+        <!-- product detail section -->
+        <section id="product-details-section" style="display: none">
             <h1>Product Details</h1>
-        </div>
-        <div class="d-flex p-2 justify-content-between" id="rating-and-review-section" style="display: block">
             <div>
-                <h3 class="fw-bolder">All Reviews <span class="fs-5 fw-normal">( <%= product.reviews.length %> )</span>
-                </h3>
+                new products
             </div>
+        </section>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-dark rounded-pill" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop">
-                Write a Review
-            </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header border border-0">
-                            <h2>Write a Review</h2>
-                        </div>
-                        <div class="modal-body">
-                            <form id="ratingForm">
-                                <div class="mb-3">
-                                    <label for="rating" class="form-label">Rating</label>
-                                    <input type="range" class="form-range" min="0" max="5" id="rating">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="review" class="form-label">Review</label>
-                                    <textarea type="text" rows="3" class="form-control" id="review" name="review" required></textarea>
-                                </div>
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Add</button>
-                            </form>
+        <!-- review and rating section -->
+        <section id="rating-and-review-section" style="display: block">
+            <div class="d-flex p-2 justify-content-between">
+                <div>
+                    <h3 class="fw-bolder">
+                        All Reviews <span class="fs-5 fw-normal">( <%= product.reviews.length %> )</span>
+                    </h3>
+                </div>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-dark rounded-pill" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    Write a Review
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border border-0">
+                                <h2>Write a Review</h2>
+                            </div>
+                            <div class="modal-body">
+                                <form id="ratingForm">
+                                    <div class="mb-3">
+                                        <label for="rating" class="form-label">Rating</label>
+                                        <input type="range" class="form-range" min="0" max="5" id="rating">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="review" class="form-label">Review</label>
+                                        <textarea type="text" rows="3" class="form-control" id="review" name="review"
+                                            required></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Add</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="faqs-section" style="display: none">
+
+            <% if(product.reviews.length === 0) { %>
+                <h1>No Reviews Available</h1>
+            <% } else { %>
+                <h1>Product Review</h1>
+            <% } %>
+
+        </section>
+
+        <!-- faqs section -->
+        <section id="faqs-section" style="display: none">
             <h1>FAQs</h1>
-        </div>
+        </section>
+
     </section>
