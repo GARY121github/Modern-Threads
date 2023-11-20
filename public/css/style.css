@@ -103,7 +103,7 @@ header {
   transition: 0.3s;
 }
 
-.product-card{
+.product-card {
   cursor: pointer;
 }
 
@@ -140,4 +140,11 @@ header {
   .nav-bar.active .toggle-button span {
     background: white;
   }
+}
+
+.active {
+  color: blue;
+  border-bottom: 2px solid black;
+  
+  /* Add any other styles you want for the active tab */
 }
