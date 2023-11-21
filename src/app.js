@@ -5,8 +5,7 @@ import methodOverride from 'method-override';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// import productRouter from './routes/product.route.js';
-import { productRouter } from './routes/index.js';
+
 
 // Get the current module's filename and directory
 const __filename = fileURLToPath(import.meta.url);
@@ -24,13 +23,16 @@ app.engine('ejs', engine);
 // Middleware setup
 app.use(express.json({ limit: '16kb' }));
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
-app.use(express.static(path.join(__dirname, '..' ,'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Method override middleware
 app.use(methodOverride('_method'));
 
-// Define and use the product router
+// routers
+import { productRouter, reviewRouter } from './routes/index.js';
+
 app.use(productRouter);
+app.use(reviewRouter);
 
 
 export default app;
