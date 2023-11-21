@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const productSchema = new Schema(
     {
-        name:{
+        name: {
             type: String,
             unique: true,
             lowercase: true,
@@ -10,19 +10,19 @@ const productSchema = new Schema(
             index: true,
             required: [true, "Name is required!!!"],
         },
-        description:{
+        description: {
             type: String,
             trim: true,
             required: [true, "Description is required!!!"],
         },
-        price:{
+        price: {
             type: Number,
-            required: [true , "Price is required!!!"],
+            required: [true, "Price is required!!!"],
             min: 0,
             default: 0,
             index: true,
         },
-        image:{
+        image: {
             type: String, // cloudinary url
             required: true
         },
@@ -35,7 +35,7 @@ const productSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
-        category:{
+        category: {
             type: Schema.Types.ObjectId,
             ref: 'Category'
         },
@@ -51,4 +51,6 @@ const productSchema = new Schema(
     }
 );
 
-export const Product = mongoose.model('Product' , productSchema);
+const Product = mongoose.model('Product', productSchema);
+
+export default Product;
