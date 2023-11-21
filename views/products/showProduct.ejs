@@ -51,7 +51,7 @@
                                     class="fa-solid fa-minus"></i></span>
                         </div>
                         <button class="btn btn-success rounded-pill" style="width: 55%;">
-                            Add to cart  <i class="fa-solid fa-cart-plus fa-bounce"></i>
+                            Add to cart <i class="fa-solid fa-cart-plus fa-bounce"></i>
                         </button>
                     </div>
                     <div class="p-5 d-flex justify-content-around border-top mt-3">
@@ -114,7 +114,7 @@
                         <div class="modal-content">
 
                             <div class="modal-body">
-                                <form id="ratingForm">
+                                <form action="<%=product._id%>/review" method="post" id="ratingForm">
                                     <div class="mb-3">
                                         <!-- <label for="rating" class="form-label">Rating</label>
                                         <input type="range" class="form-range" min="0" max="5" id="rating"> -->
@@ -135,11 +135,11 @@
                                         </fieldset>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="review" class="form-label fs-4 fw-bold">Review</label>
-                                        <textarea type="text" rows="3" class="form-control" id="review" name="review"
+                                        <label for="comment" class="form-label fs-4 fw-bold">Review</label>
+                                        <textarea type="text" rows="3" class="form-control" id="comment" name="comment"
                                             required></textarea>
                                     </div>
-                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Add</button>
+                                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Add</button>
                                 </form>
                             </div>
                         </div>
@@ -150,7 +150,29 @@
             <% if(product.reviews.length===0) { %>
                 <h1>No Reviews Available</h1>
                 <% } else { %>
-                    <h1>Product Review</h1>
+                    <div class="row">
+                        <% for(let review of product.reviews){ %>
+                            <div class="col-sm-6 p-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <% for(let i=1 ; i <=review.rating ; i++){ %>
+                                                <i class="fa-solid fa-star" style="color: #ffd60a;"></i>
+                                                <% } %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <%=review.comment%>
+                                        </p>
+
+                                        <p>
+                                            Posted on <span style="color:green;"><%=review.updatedAt.toDateString()%></span>
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
                     <% } %>
 
         </section>
