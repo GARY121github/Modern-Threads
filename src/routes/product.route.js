@@ -32,5 +32,27 @@ router.get('/product/:id', async (req, res) => {
     res.render('products/showProduct', { product });
 })
 
+// edit route 
+// router.get('/product/:id/edit', async(req,res)=>{
+//     const {id} = req.params;
+//     let foundproduct = await Product.findById(id);
+//     res.render('products/editProduct',{foundproduct});
+// })
+
+router.patch('/product/:id', async(req,res)=>{
+    let {id} = req.params ;
+    let { name,  description ,  price,  image,  stock,  manufacturer,category} = req.body;
+    await Product.findByIdAndUpdate(id,{name,  description ,  price,  image,  stock,  manufacturer,category})
+    res.redirect(`/product/${id}`);
+})
+
+// delete route 
+router.delete('/product/:id/delete', async (req,res)=>{
+    let {id} = req.params ;
+    const {product} = Product.findById(id);
+    await Product.findByIdAndDelete(id);
+    res.redirect('/');
+})  
+
 
 export default router;

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import Review from './review.model';
 
 const productSchema = new Schema(
     {
@@ -51,6 +52,15 @@ const productSchema = new Schema(
     }
 );
 
+Product.post('findOneAndDelete', async function(product){
+    if(reviews.length>0){
+        await Product.deleteMany({_id:{$in:product.reviews}});
+    }
+})
+
 const Product = mongoose.model('Product', productSchema);
+
+
+
 
 export default Product;
