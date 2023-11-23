@@ -57,7 +57,7 @@ const userSchema = new Schema(
         },
         first: {
             type: String,
-            required: [true, "Username is required!!!"],
+            required: [true, "First is required!!!"],
             lowercase: true,
             trim: true,
         },
@@ -94,12 +94,11 @@ const userSchema = new Schema(
                 ref: 'Payment'
             }
         ],
-        cart: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Cart'
-            }
-        ],
+        cart: {
+            type: Schema.Types.ObjectId,
+            ref: 'Cart'
+        }
+        ,
         reviews: [
             {
                 type: Schema.Types.ObjectId,

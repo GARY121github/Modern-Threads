@@ -4,6 +4,7 @@ import path from 'path';
 import methodOverride from 'method-override';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import expressSession from 'express-session';
 
 
 
@@ -14,7 +15,6 @@ const __dirname = dirname(__filename);
 // Create an Express application
 const app = express();
 
-// console.log(path.join(__dirname, '..' ,'public'));
 // Configure the view engine and views directory
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '..', 'views'));
@@ -28,9 +28,27 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Method override middleware
 app.use(methodOverride('_method'));
 
-// routers
-import { productRouter, reviewRouter } from './routes/index.js';
 
+// create express session
+const session = expressSession({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: true, // Ensures cookies are only sent over HTTPS
+        httpOnly: true, // Helps prevent XSS attacks by not allowing the browser to access cookies via JavaScript
+        maxAge: 7 * 24 * 60 * 60 * 1000, // Set maxAge to 7 days (7 days * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
+    },
+});
+
+app.use(session);
+
+// routers
+import {
+    productRouter, reviewRouter, userRouter
+} from './routes/index.js';
+
+app.use('/auth', userRouter);
 app.use(productRouter);
 app.use(reviewRouter);
 

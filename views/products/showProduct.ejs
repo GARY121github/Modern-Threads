@@ -50,7 +50,7 @@
                             <span class="fw-bold" id="sub" style="cursor:pointer;"><i
                                     class="fa-solid fa-minus"></i></span>
                         </div>
-                        <button class="btn btn-success rounded-pill" style="width: 55%;">
+                        <button id="add-to-cart" class="btn btn-success rounded-pill" style="width: 55%;">
                             Add to cart <i class="fa-solid fa-cart-plus fa-bounce"></i>
                         </button>
                     </div>
@@ -110,7 +110,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
 
                             <div class="modal-body">
@@ -165,9 +165,11 @@
                                         </p>
 
                                         <p>
-                                            Posted on <span style="color:green;"><%=review.updatedAt.toDateString()%></span>
+                                            Posted on <span style="color:green;">
+                                                <%=review.updatedAt.toDateString()%>
+                                            </span>
                                         </p>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -183,3 +185,7 @@
         </section>
 
     </section>
+
+
+    
+    <script type="module" src="/js/products/showProduct.js" defer></script>
