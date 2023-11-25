@@ -40,9 +40,10 @@ const session = expressSession({
         maxAge: 7 * 24 * 60 * 60 * 1000, // Set maxAge to 7 days (7 days * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
     },
 });
-
 app.use(session);
 
+
+app.locals.user = null;
 
 
 // routers

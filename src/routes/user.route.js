@@ -34,6 +34,8 @@ router.post('/register', async (req, res) => {
         const token = await newUser.generateAccessToken();
         res.cookie('userToken', token);
 
+        req.app.locals.user = newUser;
+
         res.redirect('/');
     } catch (error) {
         console.error("Error during registration:", error);
@@ -79,8 +81,11 @@ router.post('/login', async (req, res) => {
         const token = await user.generateAccessToken();
         res.cookie('userToken', token);
 
-        
+
         console.log("user is logged in!!");
+
+        req.app.locals.user = user;
+
         // Redirect to the appropriate URL
         res.redirect(redirectingUrl || '/');
     } catch (error) {
@@ -93,8 +98,8 @@ router.post('/login', async (req, res) => {
 // Logout Route
 router.get('/logout', (req, res) => {
     req.session.destroy();
+    req.app.locals.user = null;
     res.clearCookie('userToken');
-    console.log("USER LOGGED OUT");
     res.redirect('/auth/login');
 });
 

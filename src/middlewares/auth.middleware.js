@@ -8,13 +8,12 @@ const authenticate = (req, res, next) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
                 // Invalid token, redirect to the login page
-                console.log("user is not verified!!", err);
+                console.log("user is not verified!!", err.message);
                 req.session.previousUrl = req.originalUrl;
-                console.log(req.session);
                 res.redirect('/auth/login');
             } else {
                 // Valid token, user is authenticated, proceed to the next middleware or route handler
-                req.user = user; // Make the user object available in subsequent middleware or route handlers if needed
+                req.app.locals.user = user; // Make the user object available in subsequent middleware or route handlers if needed
                 next();
             }
         });

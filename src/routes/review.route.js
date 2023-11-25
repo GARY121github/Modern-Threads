@@ -14,7 +14,7 @@ router.post('/product/:id/review', authenticate, async (req, res) => {
 
     product.reviews.push(review);
     product.save();
-
+    
     res.redirect(`/product/${id}`);
 });
 
