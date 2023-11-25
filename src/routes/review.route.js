@@ -9,12 +9,15 @@ router.post('/product/:id/review', authenticate, async (req, res) => {
     let { rating, comment } = req.body;
     rating = parseInt(rating);
 
-    const review = await Review.create({ rating, comment });
+    const user = req.app.locals.user._id;
+
+    const review = await Review.create({ rating, comment, user });
     const product = await Product.findById(id);
 
     product.reviews.push(review);
     product.save();
-    
+
+
     res.redirect(`/product/${id}`);
 });
 

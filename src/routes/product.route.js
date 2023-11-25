@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/create', async (req, res) => {
+    // console.log(req.app.locals.user);
     res.render('products/createProduct');
 })
 
@@ -20,9 +21,12 @@ router.post('/create', authenticate, upload.single('image'), async (req, res) =>
     const image = await uploadImage(req.file.path);
 
     const { name, description, price, stock } = req.body;
-    await Product.create({ name, description, price, image, stock });
 
-    req.flash('success', 'Product created successfully');
+    const manufacturer = req.app.locals.user._id;
+
+    await Product.create({ name, description, price, image, stock , manufacturer});
+
+
     res.redirect('/');
 });
 
