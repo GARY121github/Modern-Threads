@@ -43,6 +43,8 @@ const session = expressSession({
 
 app.use(session);
 
+
+
 // routers
 import {
     productRouter, reviewRouter, userRouter

@@ -5,7 +5,7 @@ const router = Router();
 
 // Registration Route
 router.get('/register', (req, res) => {
-    res.render('auth/signup');
+    res.render('auth/signUp');
 });
 
 router.post('/register', async (req, res) => {
@@ -20,19 +20,17 @@ router.post('/register', async (req, res) => {
 
         // Check if the user already exists
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-
         if (existingUser) {
             console.log("User already exists");
-            return res.redirect('/auth/register');
+            return res.status(400).redirect('/auth/register');
         }
 
         // Create a new user
         const newUser = await User.create({ username, email, password, first, last, role });
 
-        console.log("User created successfully:", newUser);
+        // console.log("User created successfully:", newUser);
 
         // Set session and cookies after successful registration
-        req.session.userId = newUser._id;
         const token = await newUser.generateAccessToken();
         res.cookie('userToken', token);
 
@@ -45,7 +43,7 @@ router.post('/register', async (req, res) => {
 
 // Login Routes
 router.get('/login', (req, res) => {
-    res.render('auth/signin');
+    res.render('auth/signIn');
 });
 
 router.post('/login', async (req, res) => {
@@ -77,11 +75,12 @@ router.post('/login', async (req, res) => {
         // Clear the previousUrl cookie
         res.clearCookie('previousUrl');
 
-        // Set session and cookies after successful login
-        req.session.userId = user.username;
+        // console.log(req.session);
         const token = await user.generateAccessToken();
         res.cookie('userToken', token);
 
+        
+        console.log("user is logged in!!");
         // Redirect to the appropriate URL
         res.redirect(redirectingUrl || '/');
     } catch (error) {

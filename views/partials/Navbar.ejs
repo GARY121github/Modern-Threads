@@ -12,14 +12,12 @@
         <input type="text" placeholder="Search for products...">
     </form>
     <div>
-        <a href="/cart"><i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">2</span></sup></i></a>
-        <a href="#"><i class="fa-regular fa-user"></i></a>
-        <div id="menu-toggle" class="toggle-button">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <% if(user){ %>
+            <a href="/cart"><i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">2</span></sup></i></a>
+            <a href="#"><i class="fa-regular fa-user"></i></a>
+            <% }else{ %>
+                <a href="/auth/logout"><i class="fa-regular fa-user"></i>Logout</a>
+                <% } %>
+
     </div>
 </nav>

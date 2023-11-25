@@ -1,8 +1,9 @@
 import { Router } from 'express'
 import { Review, Product } from '../models/index.js';
+import { authenticate } from '../middlewares/index.js';
 const router = new Router();
 
-router.post('/product/:id/review', async (req, res) => {
+router.post('/product/:id/review', authenticate, async (req, res) => {
     const { id } = req.params;
 
     let { rating, comment } = req.body;
