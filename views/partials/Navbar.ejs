@@ -1,25 +1,33 @@
 <nav class="nav-bar">
     <button class="fs-2">
-        Modern Threads
+        <a href="/" style="text-decoration : none;">Modern Threads</a>
     </button>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="/create">Create</a></li>
-    </ul>
-    <form>
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search for products...">
-    </form>
-    <div>
-        <i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">2</span></sup></i>
-        <i class="fa-regular fa-user"></i>
-        <div id="menu-toggle" class="toggle-button">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+
+    <% if(user){ %>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <% if(user.role==='seller' ){ %>
+                <li><a href="/create">Create</a></li>
+                <% } %>
+        </ul>
+        <form>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search for products...">
+        </form>
+        <% } %>
+            <div>
+                <% if(user){ %>
+                    <a href="/cart"><i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">2</span></sup></i></a>
+                    <a href="#"><i class="fa-regular fa-user"></i></a>
+                    <% }else{ %>
+                        <button class="fs-5">
+                            <a href="/auth/login" style="text-decoration : none;">Login</a>
+                        </button>
+                        <button class="fs-5">
+                            <a href="/auth/register" style="text-decoration : none;">Signup</a>
+                        </button>
+                        <% } %>
+
+            </div>
 </nav>

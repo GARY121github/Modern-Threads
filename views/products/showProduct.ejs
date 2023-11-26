@@ -50,7 +50,7 @@
                             <span class="fw-bold" id="sub" style="cursor:pointer;"><i
                                     class="fa-solid fa-minus"></i></span>
                         </div>
-                        <button class="btn btn-success rounded-pill" style="width: 55%;">
+                        <button id="add-to-cart" class="btn btn-success rounded-pill" style="width: 55%;">
                             Add to cart <i class="fa-solid fa-cart-plus fa-bounce"></i>
                         </button>
                     </div>
@@ -58,12 +58,14 @@
                         <button class="btn btn-dark rounded">
                             <i class="fa-solid fa-heart"></i> Add to Wishlist
                         </button>
-                        <button class="btn btn-danger rounded">
-                            <i class="fa-solid fa-trash"></i> Delete
-                        </button>
-                        <button class="btn btn-info rounded">
-                            <i class="fa-regular fa-pen-to-square"></i> Edit
-                        </button>
+                        <% if(product.manufacturer.toString()===user._id) {%>
+                            <button class="btn btn-danger rounded">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                            <button class="btn btn-info rounded">
+                                <i class="fa-regular fa-pen-to-square"></i> Edit
+                            </button>
+                            <% } %>
                     </div>
                 </div>
             </div>
@@ -110,7 +112,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
 
                             <div class="modal-body">
@@ -156,18 +158,31 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <% for(let i=1 ; i <=review.rating ; i++){ %>
-                                                <i class="fa-solid fa-star" style="color: #ffd60a;"></i>
-                                                <% } %>
+                                            <% for(let i=1 ; i <=5 ; i++){ %>
+                                                <% if(i <=review.rating){ %>
+                                                    <i class="fa-solid fa-star" style="color: #ffd60a;"></i>
+                                                    <% }else{ %>
+                                                        <i class="fa-solid fa-star"></i>
+                                                        <% } %>
+                                                            <% } %>
+                                                                <% if(product.manufacturer.toString()===user._id
+                                                                    ||review.user.toString()===user._id) {%>
+                                                                    <a class="float-end"
+                                                                        href="/product/<%=product._id%>/review"
+                                                                        method="post"><i class="fa-solid fa-trash"
+                                                                            style="color: #ff0000;"></i></a>
+                                                                    <% } %>
                                         </h5>
                                         <p class="card-text">
                                             <%=review.comment%>
                                         </p>
 
                                         <p>
-                                            Posted on <span style="color:green;"><%=review.updatedAt.toDateString()%></span>
+                                            Posted on <span style="color:green;">
+                                                <%=review.updatedAt.toDateString()%>
+                                            </span>
                                         </p>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -183,3 +198,7 @@
         </section>
 
     </section>
+
+
+
+    <script type="module" src="/js/products/showProduct.js" defer></script>
