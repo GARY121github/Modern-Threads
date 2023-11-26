@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
         const token = await newUser.generateAccessToken();
         res.cookie('userToken', token);
 
-        req.app.locals.user = newUser;
+        // req.app.locals.user = newUser;
 
         res.redirect('/');
     } catch (error) {
@@ -84,7 +84,7 @@ router.post('/login', async (req, res) => {
 
         console.log("user is logged in!!");
 
-        req.app.locals.user = user;
+        // req.app.locals.user = user;
 
         // Redirect to the appropriate URL
         res.redirect(redirectingUrl || '/');
@@ -98,7 +98,7 @@ router.post('/login', async (req, res) => {
 // Logout Route
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    req.app.locals.user = null;
+    // req.app.locals.user = null;
     res.clearCookie('userToken');
     res.redirect('/auth/login');
 });

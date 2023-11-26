@@ -43,7 +43,21 @@ const session = expressSession({
 app.use(session);
 
 
-app.locals.user = null;
+// app.locals.user = null;
+import jwt from 'jsonwebtoken';
+app.use((req, res, next) => {
+    res.locals.user = null;
+    const token = req.headers.cookie?.split('=')[1];
+    if (token) {
+        // Verify the token
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+            if (user) {
+                res.locals.user = user;
+            }
+        });
+    }
+    next();
+})
 
 
 // routers
