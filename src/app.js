@@ -45,29 +45,41 @@ app.use(session);
 
 // app.locals.user = null;
 import jwt from 'jsonwebtoken';
-app.use((req, res, next) => {
+import { User } from './models/index.js';
+
+app.use(async (req, res, next) => {
     res.locals.user = null;
     const token = req.headers.cookie?.split('=')[1];
-    if (token) {
-        // Verify the token
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if (user) {
-                res.locals.user = user;
-            }
-        });
+
+    try {
+        if (token) {
+            // Verify the token
+            const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+            const id = decoded._id;
+
+            // Retrieve user details excluding sensitive information
+            const user = await User.findById(id).select('-password -orders -payments -reviews -products');
+
+            res.locals.user = user;
+        }
+    } catch (err) {
+        // Handle JWT verification errors
+        console.error('JWT Verification Error:', err.message);
     }
     next();
-})
+});
 
 
 // routers
 import {
-    productRouter, reviewRouter, userRouter
+    productRouter, reviewRouter,
+    userRouter, cartRouter,
 } from './routes/index.js';
 
 app.use('/auth', userRouter);
 app.use(productRouter);
 app.use(reviewRouter);
+app.use('/cart', cartRouter);
 
 
 export default app;

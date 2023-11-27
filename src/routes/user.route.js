@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
         // Create a new user
         const newUser = await User.create({ username, email, password, first, last, role });
 
-        // console.log("User created successfully:", newUser);
+
 
         // Set session and cookies after successful registration
         const token = await newUser.generateAccessToken();
@@ -36,7 +36,17 @@ router.post('/register', async (req, res) => {
 
         // req.app.locals.user = newUser;
 
-        res.redirect('/');
+        // Retrieve previous URL from cookies
+        const previousUrl = (req.headers.cookie || '').split('previousUrl=')[1]?.split('%').filter(Boolean);
+
+        // Construct redirecting URL
+        const redirectingUrl = '/' + (previousUrl || []).map(url => url.substring(2)).join('/');
+
+        // Clear the previousUrl cookie
+        res.clearCookie('previousUrl');
+
+        console.log('User registration successful!!!');
+        res.redirect(redirectingUrl || '/');
     } catch (error) {
         console.error("Error during registration:", error);
         res.status(500).send("Internal Server Error");

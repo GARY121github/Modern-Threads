@@ -51,6 +51,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Get all elements with the class 'size-button'
+const sizeButtons = document.querySelectorAll('.size-button');
+
+// Add click event listeners to each button
+sizeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Reset the background color of all buttons to the default
+        sizeButtons.forEach(b => {
+            b.style.backgroundColor = '#F0F0F0';
+            b.style.color = '#000000';
+        });
+
+        // Set the background color of the clicked button to a different color (e.g., black)
+        button.style.backgroundColor = '#000000';
+        button.style.color = '#FFFFFF';
+    });
+});
 
 //  AXIOS REQUEST TO ADD PRODUCT IN CART
 
@@ -58,17 +75,17 @@ const addToCartBtn = document.querySelector('#add-to-cart');
 const numberOfItems = document.querySelector('#number-of-items');
 
 const addToCart = async (data) => {
-    const productId = window.location.pathname.split('/')[2];  
+    const productId = window.location.pathname.split('/')[2];
     try {
         // Send a POST request
         const res = await axios({
             method: 'post',
-            url: `/cart/${productId}/add`,
+            url: `/cart/add`,
             data: {
                 quantity: parseInt(data.numberOfItems),
+                productId: productId
             }
         });
-        
         window.location.href = "/cart";
 
     } catch (error) {

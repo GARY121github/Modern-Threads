@@ -1,0 +1,76 @@
+<% layout('layouts/boilerplate') -%>
+
+    <main class="container mt-4">
+        <h1>Cart</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <%for(let item of cart){%>
+                    <div class="card mb-3 p-2">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="<%=item.productId.image%>" class="img-fluid rounded" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h2 class="card-title">
+                                        <%=item.productId.name.toUpperCase()%>
+                                    </h2>
+                                    <p class="card-text">
+                                        <%=item.productId.description%>
+                                    </p>
+                                    <h3>$ <%=item.productId.price%>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- Order Summary Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Order Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Order Details -->
+                                <p class="card-text"><strong>Order ID:</strong> #123456</p>
+                                <p class="card-text"><strong>Date:</strong> January 15, 2023</p>
+
+                                <!-- Product List -->
+                                <ul class="list-group">
+                                    <!-- Product 1 -->
+                                    <li class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Product Name 1</span>
+                                            <span>$19.99</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- Product 2 -->
+                                    <li class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Product Name 2</span>
+                                            <span>$29.99</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- Add more products as needed -->
+                                </ul>
+
+                                <!-- Order Total -->
+                                <p class="card-text mt-3"><strong>Total:</strong> $49.98</p>
+
+                                <!-- Checkout Button -->
+                                <button type="button" class="btn btn-primary btn-block mt-4">Proceed to
+                                    Checkout</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
