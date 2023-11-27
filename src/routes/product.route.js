@@ -31,7 +31,7 @@ router.post('/create', authenticate, upload.single('image'), async (req, res) =>
 });
 
 router.get('/product/:id', authenticate, async (req, res) => {
-    // console.log(req.session.user);
+    
     const { id } = req.params;
     const product = await Product.findById(id).populate('reviews');
 

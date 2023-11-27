@@ -158,20 +158,25 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <% for(let i=1 ; i <=5 ; i++){ %>
-                                                <% if(i <=review.rating){ %>
-                                                    <i class="fa-solid fa-star" style="color: #ffd60a;"></i>
-                                                    <% }else{ %>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <% } %>
-                                                            <% } %>
-                                                                <% if(product.manufacturer.toString()===user._id
-                                                                    ||review.user.toString()===user._id) {%>
-                                                                    <a class="float-end"
-                                                                        href="/product/<%=product._id%>/review"
-                                                                        method="post"><i class="fa-solid fa-trash"
-                                                                            style="color: #ff0000;"></i></a>
+                                            <%if(product.manufacturer?.toString()===user._id?.toString() ||
+                                                review.user?.toString()===user._id?.toString()){%>
+                                                <form method="post"
+                                                    action="/product/<%=product._id%>/review/<%=review._id%>?_method=DELETE"
+                                                    class="float-end" style="cursor:pointer;">
+                                                    <button type="submit"
+                                                    style="border:none; background:none;">
+                                                        <i class="fa-solid fa-trash" style="color: #f00000;"></i>
+                                                    </button>
+                                                </form>
+                                                <% } %>
+                                                    <% for(let i=1 ; i <=5 ; i++){ %>
+                                                        <% if(i <=review.rating){ %>
+                                                            <i class="fa-solid fa-star" style="color: #ffd60a;"></i>
+                                                            <% }else{ %>
+                                                                <i class="fa-solid fa-star"></i>
+                                                                <% } %>
                                                                     <% } %>
+
                                         </h5>
                                         <p class="card-text">
                                             <%=review.comment%>
