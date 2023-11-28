@@ -12,8 +12,7 @@ const authenticate = (req, res, next) => {
                 req.session.previousUrl = req.originalUrl;
                 res.redirect('/auth/login');
             } else {
-                // Valid token, user is authenticated, proceed to the next middleware or route handler
-                req.app.locals.user = user; // Make the user object available in subsequent middleware or route handlers if needed
+                // user is verified
                 next();
             }
         });

@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.render('products/allProducts', { Products: allProducts });
 })
 
-router.get('/create', async (req, res) => {
+router.get('/create', authenticate, async (req, res) => {
     // console.log(req.app.locals.user);
     res.render('products/createProduct');
 })
@@ -19,19 +19,16 @@ router.post('/create', authenticate, upload.single('image'), async (req, res) =>
 
     // upload the image to cloudinary
     const image = await uploadImage(req.file.path);
-
     const { name, description, price, stock } = req.body;
+    const manufacturer = res.locals.user._id;
 
-    const manufacturer = req.app.locals.user._id;
-
-    await Product.create({ name, description, price, image, stock , manufacturer});
-
+    await Product.create({ name, description, price, image, stock, manufacturer });
 
     res.redirect('/');
 });
 
 router.get('/product/:id', authenticate, async (req, res) => {
-    // console.log(req.session.user);
+
     const { id } = req.params;
     const product = await Product.findById(id).populate('reviews');
 

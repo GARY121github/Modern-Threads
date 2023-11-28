@@ -35,6 +35,19 @@ const addressSchema = new Schema(
     }
 );
 
+const cartItems = new Schema(
+    {
+        productId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        quantity: {
+            type: Number,
+            default: 1
+        }
+    }
+)
+
 const userSchema = new Schema(
     {
         username: {
@@ -94,11 +107,9 @@ const userSchema = new Schema(
                 ref: 'Payment'
             }
         ],
-        cart: {
-            type: Schema.Types.ObjectId,
-            ref: 'Cart'
-        }
-        ,
+        cart: [
+            cartItems
+        ],
         reviews: [
             {
                 type: Schema.Types.ObjectId,

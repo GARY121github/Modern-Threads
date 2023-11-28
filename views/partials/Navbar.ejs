@@ -18,7 +18,9 @@
         <% } %>
             <div>
                 <% if(user){ %>
-                    <a href="/cart"><i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">2</span></sup></i></a>
+                    <a href="/cart"><i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">
+                                    <%=user.cart.length%>
+                                </span></sup></i></a>
                     <a href="#"><i class="fa-regular fa-user"></i></a>
                     <% }else{ %>
                         <button class="fs-5">
