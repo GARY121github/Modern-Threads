@@ -21,15 +21,16 @@
                     <a href="/cart"><i class="fa-solid fa-cart-shopping"><sup><span id="sup-item">
                                     <%=user.cart.length%>
                                 </span></sup></i></a>
-                    <a href="#"><i class="fa-regular fa-user"></i></a>
-                    <% }else{ %>
-                        <button class="fs-5">
-                            <a href="/auth/login" style="text-decoration : none;">Login</a>
-                        </button>
-                        <button class="fs-5">
-                            <a href="/auth/register" style="text-decoration : none;">Signup</a>
-                        </button>
-                        <% } %>
+                    <a href="/auth/logout">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+
+                        <% }else{ %>
+                            <button class="fs-5">
+                                <a href="/auth/login" style="text-decoration : none;">Login</a>
+                            </button>
+                            <button class="fs-5">
+                                <a href="/auth/register" style="text-decoration : none;">Signup</a>
+                            </button>
+                            <% } %>
 
             </div>
 </nav>

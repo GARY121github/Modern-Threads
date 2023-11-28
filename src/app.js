@@ -50,7 +50,6 @@ import { User } from './models/index.js';
 app.use(async (req, res, next) => {
     res.locals.user = null;
     const token = req.headers.cookie?.split('=')[1];
-
     try {
         if (token) {
             // Verify the token
