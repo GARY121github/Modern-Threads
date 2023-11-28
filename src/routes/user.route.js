@@ -15,13 +15,16 @@ router.post('/register', async (req, res) => {
         // Validation
         if ([username, email, password, first].some((field) => !field || field.trim() === "")) {
             console.log("Invalid user input");
+            req.flash('error', 'Invalid credentials!');
             return res.redirect('/auth/register');
         }
 
         // Check if the user already exists
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
+            req.flash('error', 'User already exist!');
             console.log("User already exists");
+            console.log(req.flash());
             return res.status(400).redirect('/auth/register');
         }
 
@@ -44,11 +47,14 @@ router.post('/register', async (req, res) => {
 
         // Clear the previousUrl cookie
         res.clearCookie('previousUrl');
-
+        req.flash('success', 'Login successful!');
+        console.log(req.flash());
         console.log('User registration successful!!!');
         res.redirect(redirectingUrl || '/');
     } catch (error) {
+        req.flash('error', 'Internal server error');
         console.error("Error during registration:", error);
+        console.log(req.flash());
         res.status(500).send("Internal Server Error");
     }
 });
@@ -67,6 +73,7 @@ router.post('/login', async (req, res) => {
 
         if (!user) {
             console.log("Invalid username");
+            req.flash('error', 'Invalid credentials. Please try again.');
             return res.redirect('/auth/login');
         }
 
@@ -75,6 +82,7 @@ router.post('/login', async (req, res) => {
 
         if (!isPasswordValid) {
             console.log("Invalid password");
+            req.flash('error', 'Invalid credentials. Please try again.');
             return res.redirect('/auth/login');
         }
 
@@ -93,6 +101,8 @@ router.post('/login', async (req, res) => {
 
 
         console.log("user is logged in!!");
+        req.flash('success', 'Login successful!');
+        console.log(req.flash());
 
         // req.app.locals.user = user;
 
@@ -100,6 +110,8 @@ router.post('/login', async (req, res) => {
         res.redirect(redirectingUrl || '/');
     } catch (error) {
         console.error("Error during login:", error);
+        req.flash('error', 'Internal server error!');
+        console.log(req.flash());
         res.status(500).send("Internal Server Error");
     }
 });
