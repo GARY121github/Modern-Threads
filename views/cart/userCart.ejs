@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') -%>
 
-    <main class="container mt-4">
+    <div class="container mt-4">
         <h1>Cart</h1>
         <div class="row">
             <div class="col-md-8">
@@ -73,7 +73,7 @@
                                                     <%=item.productId.name.toUpperCase() %>
                                                 </span>
                                                 <span style="color:red;">
-                                                   $<%= item.productId.price * item.quantity%>
+                                                    $<%= item.productId.price * item.quantity%>
                                                 </span>
                                             </div>
                                         </li>
@@ -82,17 +82,52 @@
 
                                 <!-- Order Total -->
                                 <h4 class="card-text mt-3 text-center"><strong>Total: $</strong>
-                                    <%= total %>
+                                    <span id="total">
+                                        <%= total %>
+                                    </span>
                                 </h4>
 
                                 <!-- Checkout Button -->
-                                <button type="button" class="btn w-100 p-2 rounded-pill btn-block mt-4"
+                                <button type="button" id="checkout" class="btn w-100 p-2 rounded-pill btn-block mt-4"
                                     style="background-color: black; color: white;">Proceed to
-                                    Checkout  <i class="fa-solid fa-right-long fa-sm"></i>
+                                    Checkout <i class="fa-solid fa-right-long fa-sm"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </main>
+            </main>
+
+            <script>
+                const add = document.getElementById('add');
+                const sub = document.getElementById('sub');
+                const numberOfItems = document.getElementById('number-of-items');
+                const checkout = document.getElementById('checkout');
+
+                add.addEventListener('click', () => {
+                    numberOfItems.innerText = parseInt(numberOfItems.innerText) + 1;
+                });
+
+                sub.addEventListener('click', () => {
+                    if (parseInt(numberOfItems.innerText) > 1) {
+                        numberOfItems.innerText = parseInt(numberOfItems.innerText) - 1;
+                    }
+                });
+
+                checkout.addEventListener('click', () => {
+
+                    console.log(parseInt(document.getElementById('total').innerText));
+
+                    axios.post('/payment/stripe', {
+                        total: parseInt(document.getElementById('total').innerText),
+                    })
+                        .then((res) => {
+                            console.log(res);
+                            window.location.href = '/cart';
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                });
+            </script>
