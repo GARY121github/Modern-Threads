@@ -75,9 +75,9 @@ import {
     userRouter, cartRouter, paymentRouter
 } from './routes/index.js';
 
-app.use('/auth', userRouter);
 app.use(productRouter);
-app.use(reviewRouter);
+app.use('/auth', userRouter);
+app.use('/review', reviewRouter);
 app.use('/cart', cartRouter);
 app.use('/payment', paymentRouter);
 
