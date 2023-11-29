@@ -1,50 +1,66 @@
 import { Router } from "express";
-
 import Stripe from 'stripe';
-const Publish_Key = process.env.STRIPE_PUBLISHABLE_KEY;
-const Secret_Key = process.env.STRIPE_SECRET_KEY;
+import { User } from '../models/index.js';
 
-const stripe = new Stripe(Secret_Key);
 const router = Router();
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-router.post('/stripe', function (req, res) {
+router.post('/stripe', async (req, res) => {
+    try {
+        const userId = res.locals.user._id;
+        const user = await User.findById(userId).populate('cart.productId');
+        const cart = user.cart;
+        const totalPrice = cart.reduce((acc, item) => {
+            return acc + item.productId.price * item.quantity;
+        }, 0);
 
-    console.log("req made");
+        // Add an item for the total price
+        const lineItems = [
+            ...cart.map(item => ({
+                price_data: {
+                    currency: 'INR',
+                    product_data: {
+                        name: item.productId.name,
+                    },
+                    unit_amount: item.productId.price,
+                },
+                quantity: item.quantity,
+            })),
+            // Item for total price
+            {
+                price_data: {
+                    currency: 'INR',
+                    product_data: {
+                        name: 'Total Price',
+                    },
+                    unit_amount: totalPrice * 100, // Stripe expects the amount in cents
+                },
+                quantity: 1, // Assuming you want the total as a single item
+            }
+        ];
 
-    // Moreover you can take more details from user
-    // like Address, Name, etc from form
-    stripe.customers.create({
-        email: 'harshprakash000@gmail.com',
-        source: 123456789,
-        name: 'Harsh',
-        address: {
-            line1: 'TC 9/4 Old MES colony',
-            postal_code: '452331',
-            city: 'Indore',
-            state: 'Madhya Pradesh',
-            country: 'India',
-        }
-    })
-        .then((customer) => {
-
-            return stripe.charges.create({
-                amount: 2500,     // Charging Rs 25
-                description: 'Web Development Product',
-                currency: 'INR',
-                customer: 2222222222222222
-            });
-        })
-        .then((charge) => {
-            console.log("PAYMENT SUCCESSFULL")
-            res.send("Success")  // If no error occurs
-        })
-        .catch((err) => {
-            res.send(err)       // If some error occurs
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            line_items: lineItems,
+            success_url: `${process.env.CLIENT_URL}/success`,
+            cancel_url: `${process.env.CLIENT_URL}/cancel`,
         });
+
+        res.json({ url: session.url });
+    }
+    catch (err) {
+        console.log(err.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/success', (req, res) => {
+    res.render('payment/success');
 })
 
-
-
-
+router.get('/cancel', (req, res) => {
+    res.render('payment/cancel')
+})
 
 export default router;

@@ -23,12 +23,35 @@ router.post('/add', async (req, res) => {
         user.cart.push({ productId, quantity });
     }
     await user.save();
-    res.send('ok');
+    res.status(200).send({ message: 'ok' });
+})
+
+router.post('/:productId/increase', async (req, res) => {
+    const { productId } = req.params;
+    const userId = res.locals.user._id;
+    const user = await User.findById(userId);
+    const product = user.cart.find(product => product.productId == productId);
+    if (product) {
+        product.quantity += 1;
+    }
+    await user.save();
+    res.redirect('/cart');
+})
+
+router.post('/:productId/decrease', async (req, res) => {
+    const { productId } = req.params;
+    const userId = res.locals.user._id;
+    const user = await User.findById(userId);
+    const product = user.cart.find(product => product.productId == productId);
+    if (product) {
+        product.quantity -= 1;
+    }
+    await user.save();
+    res.redirect('/cart');
 })
 
 router.delete('/:id/delete', async (req, res) => {
-    console.log(req.params.id);
-    const { id : productId } = req.params;
+    const { id: productId } = req.params;
     const userId = res.locals.user._id;
     const user = await User.findById(userId);
     const product = user.cart.find(product => product.productId == productId);
@@ -39,6 +62,15 @@ router.delete('/:id/delete', async (req, res) => {
     res.redirect('/cart');
 })
 
+
+router.get('/clear-cart', async (req, res) => {
+    const { id: productId } = req.params;
+    const userId = res.locals.user._id;
+    const user = await User.findById(userId);
+    user.cart = [];
+    await user.save();
+    res.redirect('/');
+})
 
 
 export default router;

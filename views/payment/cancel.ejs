@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            background-color: #f8d7da;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards, rubberBand 1s 0.5s ease-out forwards;
+        }
+
+        .failure-icon {
+            font-size: 100px;
+            color: #dc3545;
+        }
+
+        .failure-title {
+            font-size: 32px;
+            color: #dc3545;
+            margin-top: 20px;
+        }
+
+        .failure-message {
+            font-size: 18px;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+
+        .retry-button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            background-color: #dc3545;
+            color: #fff;
+            margin-top: 20px;
+            border: 2px solid #dc3545;
+        }
+
+        .retry-button:hover {
+            background-color: #c82333;
+            color: #fff;
+            border-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rubberBand {
+            0% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.25);
+            }
+
+            40% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container animate__animated">
+        <i class="fa-solid fa-times-circle failure-icon"></i>
+        <div class="failure-title">Payment Failed</div>
+        <div class="failure-message">Oops! Something went wrong with your payment. Please try again.</div>
+
+        <a href="/cart" class="retry-button">Back To Cart</a>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
