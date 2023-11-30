@@ -5,6 +5,8 @@ import methodOverride from 'method-override';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import expressSession from 'express-session';
+import flash from 'connect-flash';
+
 
 
 
@@ -33,7 +35,7 @@ app.use(methodOverride('_method'));
 const session = expressSession({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         secure: true, // Ensures cookies are only sent over HTTPS
         httpOnly: true, // Helps prevent XSS attacks by not allowing the browser to access cookies via JavaScript
@@ -41,6 +43,13 @@ const session = expressSession({
     },
 });
 app.use(session);
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 
 
 // app.locals.user = null;
@@ -65,6 +74,7 @@ app.use(async (req, res, next) => {
         // Handle JWT verification errors
         console.error('JWT Verification Error:', err.message);
     }
+    console.log(res.locals.success);
     next();
 });
 

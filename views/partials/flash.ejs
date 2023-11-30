@@ -1,0 +1,17 @@
+<div class="row mx-auto">
+    <% if(success && success.length > 0){ %>
+        <div class="alert alert-warning alert-dismissible fade show mx-auto " role="alert">
+            <strong class="mx-auto" style="padding-left: 42em;"><%=success[0]%></strong>
+            <button type="button" class="btn-close mx-auto" data-bs-dismiss="alert" aria-label="Close" ></button>
+          </div>
+    <% } %>
+</div>
+
+<% if(error && error.length > 0 ){ %>
+    
+    <div class="alert alert-danger" role="alert">
+        <strong><%=error[0]%></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+<% } %>
