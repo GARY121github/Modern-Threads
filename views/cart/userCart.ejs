@@ -1,99 +1,143 @@
 <% layout('layouts/boilerplate') -%>
 <%- include('../partials/flash.ejs') %>
 
-    <main class="container mt-4">
-        <h1>Cart</h1>
-        <div class="row">
-            <div class="col-md-8">
-                <%for(let item of cart){%>
-                    <div class="card mb-3 p-2">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="<%=item.productId.image%>" class="img-fluid rounded" alt="...">
+    <div class="container mt-4">
+        <% if(cart.length> 0) {%>
+            <div class="row">
+                <div class="col-md-8">
+
+                    <%for(let item of cart){%>
+                        <div class="card mb-3 p-2">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="<%=item.productId.image%>" class="img-fluid rounded" alt="...">
+                                </div>
+                                <div class="col-md-8 ">
+                                    <div class="card-body">
+
+                                        <form action="/cart/<%=item.productId._id%>/delete?_method=DELETE" method="post"
+                                            class="float-end mt-2" style="cursor:pointer;">
+                                            <button class="fs-4" type="submit" style="border:none; background:none;">
+                                                <i class="fa-solid fa-trash" style="color: #f00000;"></i>
+                                            </button>
+                                        </form>
+                                        <h2 class="card-title">
+                                            <%=item.productId.name.toUpperCase()%>
+                                        </h2>
+                                        <p class="card-text">
+                                            Size : <span class="text-muted">Medium</span>
+                                        </p>
+
+                                        <p class="card-text">
+                                            Color : <span class="text-muted">Black</span>
+                                        </p>
+                                        <h3 class="fs-2">&#8377; <%=item.productId.price%>
+                                        </h3>
+
+                                        <div class="rounded-pill d-flex justify-content-around p-1 mt-5 align-items-center"
+                                            style="width: 20%; background-color:#F0F0F0;">
+                                            <form action="/cart/<%=item.productId._id%>/increase" method="post"
+                                                class="fw-bold" id="add" style="cursor:pointer;">
+                                                <button type="submit" style="border: none; background: none;">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </button>
+                                            </form>
+
+                                            <p class="mb-0" id="number-of-items">
+                                                <%=item.quantity%>
+                                            </p>
+                                            <form action="/cart/<%=item.productId._id%>/decrease" method="post"
+                                                class="fw-bold" id="sub" style="cursor:pointer;">
+                                                <button type="submit" style="border: none; background: none;">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8 ">
+                        </div>
+                        <%}%>
+
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <!-- Order Summary Card -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Order Summary</h5>
+                                </div>
                                 <div class="card-body">
 
-                                    <form action="/cart/<%=item.productId._id%>/delete?_method=DELETE" method="post"
-                                        class="float-end mt-2" style="cursor:pointer;">
-                                        <button class="fs-4" type="submit" style="border:none; background:none;">
-                                            <i class="fa-solid fa-trash" style="color: #f00000;"></i>
-                                        </button>
-                                    </form>
-                                    <h2 class="card-title">
-                                        <%=item.productId.name.toUpperCase()%>
-                                    </h2>
-                                    <p class="card-text">
-                                        Size : <span class="text-muted">Medium</span>
-                                    </p>
+                                    <!-- Product List -->
+                                    <ul class="list-group">
 
-                                    <p class="card-text">
-                                        Color : <span class="text-muted">Black</span>
-                                    </p>
-                                    <h3 class="fs-2">$ <%=item.productId.price%>
-                                    </h3>
+                                        <% for(let item of cart){ %>
+                                            <!-- Product 1 -->
+                                            <li class="list-group-item">
+                                                <div class="d-flex justify-content-between">
+                                                    <span>
+                                                        <%=item.productId.name.toUpperCase() %>
+                                                    </span>
+                                                    <span style="color:red;">
+                                                        &#8377;<%= item.productId.price * item.quantity%>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            <%}%>
+                                    </ul>
 
-                                    <div class="rounded-pill d-flex justify-content-around p-1 mt-5 align-items-center"
-                                        style="width: 20%; background-color:#F0F0F0;">
-                                        <span class="fw-bold" id="add" style="cursor:pointer;"><i
-                                                class="fa-solid fa-plus"></i></span>
-                                        <p class="mb-0" id="number-of-items">
-                                            <%=item.quantity%>
-                                        </p>
-                                        <span class="fw-bold" id="sub" style="cursor:pointer;"><i
-                                                class="fa-solid fa-minus"></i></span>
-                                    </div>
+                                    <!-- Order Total -->
+                                    <h4 class="card-text mt-3 text-center"><strong>Total: &#8377;</strong>
+                                        <span id="total">
+                                            <%= total %>
+                                        </span>
+                                    </h4>
 
-
+                                    <!-- Checkout Button -->
+                                    <button type="button" id="checkout"
+                                        class="btn w-100 p-2 rounded-pill btn-block mt-4"
+                                        style="background-color: black; color: white;">Proceed to
+                                        Checkout <i class="fa-solid fa-right-long fa-sm"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <%} else {%>
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; height: 90vh; width: 100%;">
+                        <h1 style="text-align: center;">Your Cart is Empty :-)</h1>
+                    </div>
+
                     <%}%>
             </div>
+    </div>
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
+    <script>
+        const add = document.getElementById('add');
+        const sub = document.getElementById('sub');
+        const numberOfItems = document.getElementById('number-of-items');
+        const checkout = document.getElementById('checkout');
 
-                        <!-- Order Summary Card -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Order Summary</h5>
-                            </div>
-                            <div class="card-body">
 
-                                <!-- Product List -->
-                                <ul class="list-group">
 
-                                    <% for(let item of cart){ %>
-                                        <!-- Product 1 -->
-                                        <li class="list-group-item">
-                                            <div class="d-flex justify-content-between">
-                                                <span>
-                                                    <%=item.productId.name.toUpperCase() %>
-                                                </span>
-                                                <span style="color:red;">
-                                                   $<%= item.productId.price * item.quantity%>
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <%}%>
-                                </ul>
+        checkout.addEventListener('click', () => {
+            axios.post('/payment/stripe')
+                .then((res) => {
+                    console.log(res.data.url);
+                    window.location.href = res.data.url;
 
-                                <!-- Order Total -->
-                                <h4 class="card-text mt-3 text-center"><strong>Total: $</strong>
-                                    <%= total %>
-                                </h4>
-
-                                <!-- Checkout Button -->
-                                <button type="button" class="btn w-100 p-2 rounded-pill btn-block mt-4"
-                                    style="background-color: black; color: white;">Proceed to
-                                    Checkout  <i class="fa-solid fa-right-long fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </main>
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        });
+    </script>
