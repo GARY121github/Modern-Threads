@@ -110,8 +110,6 @@ router.post('/login', async (req, res) => {
         res.redirect(redirectingUrl || '/');
     } catch (error) {
         console.error("Error during login:", error);
-        req.flash('error', 'Internal server error!');
-        console.log(req.flash());
         res.status(500).send("Internal Server Error");
     }
 });

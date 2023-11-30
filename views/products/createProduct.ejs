@@ -1,5 +1,7 @@
 <% layout('layouts/boilerplate') -%>
 
+<%- include('../partials/flash.ejs') %>
+
     <div class="container mt-5 mb-5">
         <h3 class="mb-4">Add a New Product</h3>
         <form action="/create" enctype="multipart/form-data" method="POST">
