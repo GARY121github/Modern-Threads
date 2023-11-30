@@ -12,9 +12,6 @@
                     </h1>
                     <h3 class="text-start">&#8377; <%=product.price%>
                     </h3>
-                    <p class="text-start">
-                        <%=product.description%>
-                    </p>
                     <div class="border-top p-2 mt-2">
                         <h4 class="text-start mb-3 fw-bold">Select Colors</h4>
                         <div class="d-flex justify-content-around" style="width:40%;">
@@ -96,21 +93,15 @@
         <section id="product-details-section" style="display: none">
 
             <div id="product-details-section" class="container mt-5">
-
-
                 <h3 class="fw-bolder">
                     <%=product.name.toUpperCase()%>
                 </h3>
-
-
                 <h4 class="text-muted">
                     <%=product.description%>
                 </h4>
-                <h6>
+                <h5>
                     Price: &#8377; <span style="color:#78290f;"><%=product.price%></span>
-                </h6>
-
-
+                </h5>
             </div>
             </div>
 

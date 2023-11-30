@@ -1,4 +1,5 @@
 import { User } from '../models/index.js';
+import sendEmail from '../utils/nodemailer.js';
 
 export const showSignUpPage = (req, res) => {
     res.render('auth/signUp');
@@ -38,6 +39,10 @@ export const registerUser = async (req, res) => {
         res.clearCookie('previousUrl');
 
         console.log('User registration successful!!!');
+
+        await sendEmail(email);
+
+        // Redirect to the appropriate URL
         res.redirect(redirectingUrl || '/');
     } catch (error) {
         console.error("Error during registration:", error);

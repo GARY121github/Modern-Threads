@@ -25,7 +25,7 @@ const uploadImage = async (imagePath) => {
             resource_type: "image",
         });
 
-        console.log("IMAGE UPLOADED SUCCESSFULLY :: ", uploadResponse.url);
+        // Return the image URL from Cloudinary
         return uploadResponse.url;
     }
     catch (error) {
