@@ -10,7 +10,7 @@
                     <h1 class="text-start">
                         <%=product.name.toUpperCase()%>
                     </h1>
-                    <h3 class="text-start">$ <%=product.price%>
+                    <h3 class="text-start">&#8377; <%=product.price%>
                     </h3>
                     <p class="text-start">
                         <%=product.description%>
@@ -94,10 +94,26 @@
 
         <!-- product detail section -->
         <section id="product-details-section" style="display: none">
-            <h1>Product Details</h1>
-            <div>
-                new products
+
+            <div id="product-details-section" class="container mt-5">
+
+
+                <h3 class="fw-bolder">
+                    <%=product.name.toUpperCase()%>
+                </h3>
+
+
+                <h4 class="text-muted">
+                    <%=product.description%>
+                </h4>
+                <h6>
+                    Price: &#8377; <span style="color:#78290f;"><%=product.price%></span>
+                </h6>
+
+
             </div>
+            </div>
+
         </section>
 
 
@@ -123,7 +139,7 @@
                         <div class="modal-content">
 
                             <div class="modal-body">
-                                <form action="<%=product._id%>/review" method="post" id="ratingForm">
+                                <form action="/review/<%=product._id%>" method="post" id="ratingForm">
                                     <div class="mb-3">
                                         <!-- <label for="rating" class="form-label">Rating</label>
                                         <input type="range" class="form-range" min="0" max="5" id="rating"> -->
@@ -168,7 +184,7 @@
                                             <%if(product.manufacturer?.toString()===user._id?.toString() ||
                                                 review.user?.toString()===user._id?.toString()){%>
                                                 <form method="post"
-                                                    action="/product/<%=product._id%>/review/<%=review._id%>?_method=DELETE"
+                                                    action="/review/<%=product._id%>/delete/<%=review._id%>?_method=DELETE"
                                                     class="float-end" style="cursor:pointer;">
                                                     <button type="submit" style="border:none; background:none;">
                                                         <i class="fa-solid fa-trash" style="color: #f00000;"></i>

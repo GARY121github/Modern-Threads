@@ -94,6 +94,7 @@ const addToCart = async (data) => {
 }
 
 addToCartBtn.addEventListener('click', () => {
+    console.log("button clicked");
     addToCart({ numberOfItems: numberOfItems.innerHTML });
 });
 
