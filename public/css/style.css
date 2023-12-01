@@ -145,3 +145,144 @@ header {
   
   /* Add any other styles you want for the active tab */
 }
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.contain{
+  display: flex;
+  margin-top: 150px;
+  background-color: #8080804a;
+  justify-content: space-around;
+  width: 100%;
+  padding: 100px;
+}
+
+.col1{
+  margin-left: -3em;
+}
+
+.col1 h3{
+  font-weight: bold;
+  font-size: 2.5em;
+  font-family: system-ui;
+}
+.para{
+  width: 17em;
+}
+
+.footer-heading{
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+.col1 p{
+  font-weight: lighter;
+  padding-top: 11px;
+}
+
+.col2 a{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.col3 a{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.col4 a{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.col5 a{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.col1 p{
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.contain div{
+  align-items: center;
+}
+
+.container1{
+  background-color: black;
+  position: relative;
+  top: 14em;
+  width: 87%;
+  margin: 0px auto;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  height: 10em;
+  border-radius: 16px;
+}
+
+.footer-left{
+  width: 35%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+  justify-content: center;
+  display: flex;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.footer-form-input{
+  width: 365px;
+  height: 45px;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px 30px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.footer-btn{
+background:white ;
+border: 2px solid #fff;
+border-radius: 30px;
+cursor: pointer;
+font-size: 15px;
+padding: 10px 30px;
+width: 365px;
+height: 45px;
+}
+
+.footer-anchor{
+  color: black;
+}
+
+.footer-content{
+  margin-left: 36px;
+  font-weight: lighter;
+  color: #786f6f;
+  font-size: 14px;
+  margin-top: 14px;
+  border-top: 2px solid #786f6f;
+  width: 89%;
+}
+
+.footer-logo i{
+  margin: 2.5px;
+  cursor: pointer;
+}
+
+

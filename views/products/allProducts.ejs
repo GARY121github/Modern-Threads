@@ -1,17 +1,5 @@
 <% layout('layouts/boilerplate') -%>
 
-    <section>
-        <div style="
-    width: 100%;
-    height: 663px;
-    top: 134px;
-    background-color:#F2F0F1;">
-                <h1 style="height: 10px;
-        width: 30px;
-        margin: auto auto;">Slider</h1>
-        </div>
-    </section>
-
     <section class="mt-3 mb-3 pb-5 border-bottom">
         <h1 class="text-center p-2 fw-bolder">NEW ARRIVALS</h1>
         <div class="container text-center">
@@ -25,13 +13,12 @@
                                 <%=Product.name%>
                             </h3>
 
-                            <p class="card-text text-start">Some quick example text to build on the card title and
-                                make
+                            <p class="card-text text-start">Some quick example text to build on the card title and make
                                 up
                                 the bulk
                                 of the card's content.</p>
 
-                            <h3 class="text-start">$ <%=Product.price%>
+                            <h3 class="text-start">&#8377 <%=Product.price%>
                             </h3>
                         </div>
                     </div>
@@ -39,8 +26,7 @@
             </div>
         </div>
 
-        <button class="border border-black p-2 rounded-pill mx-auto" style="width: 9em; display: block;">view all
-            </h1>
+
     </section>
 
     <section class="mt-3 mb-3 pb-5">
@@ -63,7 +49,4 @@
                     <% } %>
             </div>
         </div>
-
-        <button class="border border-black p-2 rounded-pill mx-auto" style="width: 9em; display: block;">view all
-            </h1>
     </section>
