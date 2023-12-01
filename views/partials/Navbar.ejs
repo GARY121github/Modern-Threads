@@ -5,8 +5,7 @@
 
     <% if(user){ %>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="/">Products</a></li>
             <% if(user.role==='seller' ){ %>
                 <li><a href="/create">Create</a></li>
                 <% } %>

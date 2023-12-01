@@ -62,9 +62,9 @@
                             <button class="btn btn-danger rounded">
                                 <i class="fa-solid fa-trash"></i> Delete
                             </button>
-                            <button class="btn btn-info rounded">
+                            <a href="/product/<%=product._id%>/edit" class="btn btn-info rounded">
                                 <i class="fa-regular fa-pen-to-square"></i> Edit
-                            </button>
+                            </a>
                             <% } else {%>
                                 <button class="btn btn-dark rounded">
                                     <i class="fa-solid fa-heart"></i> Add to Wishlist
@@ -212,8 +212,23 @@
         </section>
 
         <!-- faqs section -->
-        <section id="faqs-section" style="display: none">
-            <h1>FAQs</h1>
+        <section id="faqs-section">
+            <div class="faq-container">
+                <h1>FAQs</h1>
+    
+                <div class="faq-item">
+                    <div class="faq-question">What is Modern Threads?</div>
+                    <div class="faq-answer">Modern Threads is a platform dedicated to exploring and discussing modern fashion trends and styles.</div>
+                </div>
+    
+                <div class="faq-item">
+                    <div class="faq-question">How can I participate in discussions?</div>
+                    <div class="faq-answer">To participate in discussions, you need to create an account and log in. Once logged in, you can join threads and share your thoughts and ideas.</div>
+                </div>
+    
+                <!-- Add more FAQ items as needed -->
+    
+            </div>
         </section>
 
     </section>

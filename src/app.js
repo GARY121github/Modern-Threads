@@ -74,6 +74,7 @@ app.use(async (req, res, next) => {
         // Handle JWT verification errors
         console.error('JWT Verification Error:', err.message);
     }
+    console.log(req.flash());
     console.log(res.locals.success);
     next();
 });

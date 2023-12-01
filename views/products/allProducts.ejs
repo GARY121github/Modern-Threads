@@ -1,25 +1,28 @@
 <% layout('layouts/boilerplate') -%>
 
+<%- include('../partials/flash.ejs') %>
+
     <section class="mt-3 mb-3 pb-5 border-bottom">
         <h1 class="text-center p-2 fw-bolder">NEW ARRIVALS</h1>
         <div class="container text-center">
             <div class="row p-3">
                 <% for(Product of Products){ %>
-                    <div class="col-sm-3 mb-2">
+                    <div class="col-sm-3 mb-4">
                         <div class="card product-card" style="border: none;"
                             onclick="location.href='/product/<%= Product._id %>'">
                             <img src="<%=Product.image%>" class="product-img mb-3" alt="...">
-                            <h3 class="text-start">
+                            <h3 class="text-start text-capitalize fs-4 ">
                                 <%=Product.name%>
                             </h3>
 
-                            <p class="card-text text-start">Some quick example text to build on the card title and make
+                            <p class="text-start">Some quick example text to build on the card title and make
                                 up
                                 the bulk
                                 of the card's content.</p>
 
-                            <h3 class="text-start">&#8377 <%=Product.price%>
+                            <h3 class="text-start" style="color:#c81d25">&#8377 <%=Product.price%>
                             </h3>
+
                         </div>
                     </div>
                     <% } %>
@@ -38,11 +41,11 @@
                         <div class="card product-card" style="border: none;"
                             onclick="location.href='/product/<%= Product._id %>'">
                             <img src="<%=Product.image%>" class="product-img mb-3" alt="...">
-                            <h3 class="text-start">
+                            <h3 class="text-start text-capitalize fs-4">
                                 <%=Product.name%>
                             </h3>
 
-                            <h3 class="text-start">$ <%=Product.price%>
+                            <h3 class="text-start">&#8377 <%=Product.price%>
                             </h3>
                         </div>
                     </div>

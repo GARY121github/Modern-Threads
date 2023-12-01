@@ -142,17 +142,16 @@ header {
 .active {
   color: blue;
   border-bottom: 2px solid black;
-  
+
   /* Add any other styles you want for the active tab */
 }
 
-
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-.contain{
+.contain {
   display: flex;
   margin-top: 150px;
   background-color: #8080804a;
@@ -161,63 +160,63 @@ header {
   padding: 100px;
 }
 
-.col1{
+.col1 {
   margin-left: -3em;
 }
 
-.col1 h3{
+.col1 h3 {
   font-weight: bold;
   font-size: 2.5em;
   font-family: system-ui;
 }
-.para{
+.para {
   width: 17em;
 }
 
-.footer-heading{
+.footer-heading {
   font-size: 1.5em;
   margin-bottom: 10px;
 }
-.col1 p{
+.col1 p {
   font-weight: lighter;
   padding-top: 11px;
 }
 
-.col2 a{
+.col2 a {
   display: block;
   text-decoration: none;
   margin-bottom: 10px;
 }
 
-.col3 a{
+.col3 a {
   display: block;
   text-decoration: none;
   margin-bottom: 10px;
 }
 
-.col4 a{
+.col4 a {
   display: block;
   text-decoration: none;
   margin-bottom: 10px;
 }
 
-.col5 a{
+.col5 a {
   display: block;
   text-decoration: none;
   margin-bottom: 10px;
 }
 
-.col1 p{
+.col1 p {
   display: block;
   text-decoration: none;
   margin-bottom: 10px;
 }
 
-.contain div{
+.contain div {
   align-items: center;
 }
 
-.container1{
+.container1 {
   background-color: black;
   position: relative;
   top: 14em;
@@ -230,7 +229,7 @@ header {
   border-radius: 16px;
 }
 
-.footer-left{
+.footer-left {
   width: 35%;
   text-align: center;
   justify-content: center;
@@ -242,7 +241,7 @@ header {
   font-size: 17px;
 }
 
-.footer-form-input{
+.footer-form-input {
   width: 365px;
   height: 45px;
   border-radius: 30px;
@@ -255,22 +254,22 @@ header {
   text-align: center;
 }
 
-.footer-btn{
-background:white ;
-border: 2px solid #fff;
-border-radius: 30px;
-cursor: pointer;
-font-size: 15px;
-padding: 10px 30px;
-width: 365px;
-height: 45px;
+.footer-btn {
+  background: white;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 10px 30px;
+  width: 365px;
+  height: 45px;
 }
 
-.footer-anchor{
+.footer-anchor {
   color: black;
 }
 
-.footer-content{
+.footer-content {
   margin-left: 36px;
   font-weight: lighter;
   color: #786f6f;
@@ -280,9 +279,41 @@ height: 45px;
   width: 89%;
 }
 
-.footer-logo i{
+.footer-logo i {
   margin: 2.5px;
   cursor: pointer;
 }
 
+#faqs-section {
+  display: block;
+  padding: 50px;
+  text-align: center;
+  background-color: #f8f8f8;
+}
 
+h1 {
+  color: #333;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
+  text-align: left;
+}
+
+.faq-question {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.faq-answer {
+  font-size: 16px;
+  color: #777;
+}

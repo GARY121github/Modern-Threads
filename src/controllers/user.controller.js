@@ -42,6 +42,8 @@ export const registerUser = async (req, res) => {
 
         await sendEmail(email);
 
+        req.flash('success', "user register successfully")
+
         // Redirect to the appropriate URL
         res.redirect(redirectingUrl || '/');
     } catch (error) {
@@ -87,6 +89,8 @@ export const loginUser = async (req, res) => {
         res.cookie('userToken', token);
 
         console.log("User is logged in!!");
+        req.flash('success', 'logged in successfully!!!');
+        console.log(req.flash());
 
         // Redirect to the appropriate URL
         res.redirect(redirectingUrl || '/');

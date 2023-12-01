@@ -16,4 +16,9 @@ router.post('/create', authenticate, upload.single('image'), productController.c
 // Route: Get product by ID
 router.get('/product/:id', authenticate, productController.showProduct);
 
+// Route: Get edit product page
+router.get('/product/:id/edit', authenticate, productController.getEditProductPage);
+
+
+
 export default router;
