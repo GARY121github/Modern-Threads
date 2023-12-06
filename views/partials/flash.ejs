@@ -1,16 +1,82 @@
-<div class="row mx-auto">
-    <% if(success && success.length > 0){ %>
-        <div class="alert alert-warning alert-dismissible fade show mx-auto " role="alert">
-            <strong class="mx-auto" style="padding-left: 42em;"><%=success%></strong>
-            <button type="button" class="btn-close mx-auto" data-bs-dismiss="alert" aria-label="Close" ></button>
-          </div>
-    <% } %>
+<style>
+    .flash-container {
+        max-width: 600px;
+        margin: auto;
+    }
+
+    /* General flash message styling */
+    .flash-message {
+        display: none;
+        animation: fadeInOut 0.8s ease-in-out;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        z-index: 10;
+    }
+
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Specific styling for success flash messages */
+    .flash-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    /* Specific styling for error flash messages */
+    .flash-error {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+</style>
+
+<div class="container mt-5 flash-container">
+    <% if (success && success.length> 0) { %>
+        <div class="flash-message flash-success" id="success-flash">
+            <%= success %>
+        </div>
+        <% } %>
+            <% if (error && error.length> 0) { %>
+                <div class="flash-message flash-error" id="error-flash">
+                    <%= error %>
+                </div>
+                <% } %>
 </div>
 
-<% if(error && error.length > 0 ){ %>
-    <div class="alert alert-danger" role="alert">
-        <strong><%=error%></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to show flash message and hide it after 2 seconds
+        function showFlashMessage(message, elementId) {
+            const flashMessage = document.getElementById(elementId);
+            flashMessage.textContent = message;
+            flashMessage.style.display = 'block';
 
-<% } %>
+            // Hide the flash message after 2 seconds
+            setTimeout(function () {
+                flashMessage.style.display = 'none';
+            }, 2000);
+        }
+
+        // Example: Show a success flash message after 3 seconds
+        setTimeout(function () {
+            showFlashMessage('<%= success %>', 'success-flash');
+        }, 1000);
+
+        // Example: Show an error flash message after 5 seconds
+        setTimeout(function () {
+            showFlashMessage('<%= error %>', 'error-flash');
+        }, 1000);
+    });
+</script>

@@ -5,9 +5,8 @@ import methodOverride from 'method-override';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import expressSession from 'express-session';
+import cookieParser from 'cookie-parser';
 import flash from 'connect-flash';
-
-
 
 
 // Get the current module's filename and directory
@@ -34,20 +33,27 @@ app.use(methodOverride('_method'));
 // create express session
 const session = expressSession({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
-        secure: true, // Ensures cookies are only sent over HTTPS
-        httpOnly: true, // Helps prevent XSS attacks by not allowing the browser to access cookies via JavaScript
+        secure: false, // Ensures cookies are only sent over HTTPS
+        httpOnly: false, // Helps prevent XSS attacks by not allowing the browser to access cookies via JavaScript
         maxAge: 7 * 24 * 60 * 60 * 1000, // Set maxAge to 7 days (7 days * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
     },
 });
 app.use(session);
+app.use(cookieParser());
 app.use(flash());
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
+    // res.locals.flash = {
+    //     success: req.flash('success'),
+    //     error: req.flash('error')
+    // };
+
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    console.log(res.locals.flash);
     next();
 })
 
@@ -58,7 +64,7 @@ import { User } from './models/index.js';
 
 app.use(async (req, res, next) => {
     res.locals.user = null;
-    const token = req.headers.cookie?.split('=')[1];
+    const token = req.cookies.userToken;
     try {
         if (token) {
             // Verify the token
@@ -74,8 +80,7 @@ app.use(async (req, res, next) => {
         // Handle JWT verification errors
         console.error('JWT Verification Error:', err.message);
     }
-    console.log(req.flash());
-    console.log(res.locals.success);
+
     next();
 });
 
