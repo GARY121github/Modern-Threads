@@ -1,6 +1,5 @@
 <% layout('layouts/boilerplate') -%>
 
-
     <section>
         <div class="container text-center">
             <div class="row p-3">
@@ -101,7 +100,9 @@
                     <%=product.description%>
                 </h4>
                 <h5>
-                    Price: &#8377; <span style="color:#78290f;"><%=product.price%></span>
+                    Price: &#8377; <span style="color:#78290f;">
+                        <%=product.price%>
+                    </span>
                 </h5>
             </div>
             </div>
@@ -215,19 +216,21 @@
         <section id="faqs-section" style="display:none;">
             <div class="container">
                 <h1>FAQs</h1>
-    
+
                 <div class="faq-item">
                     <div class="faq-question">What is Modern Threads?</div>
-                    <div class="faq-answer">Modern Threads is a platform dedicated to exploring and discussing modern fashion trends and styles.</div>
+                    <div class="faq-answer">Modern Threads is a platform dedicated to exploring and discussing modern
+                        fashion trends and styles.</div>
                 </div>
-    
+
                 <div class="faq-item">
                     <div class="faq-question">How can I participate in discussions?</div>
-                    <div class="faq-answer">To participate in discussions, you need to create an account and log in. Once logged in, you can join threads and share your thoughts and ideas.</div>
+                    <div class="faq-answer">To participate in discussions, you need to create an account and log in.
+                        Once logged in, you can join threads and share your thoughts and ideas.</div>
                 </div>
-    
+
                 <!-- Add more FAQ items as needed -->
-    
+
             </div>
         </section>
 

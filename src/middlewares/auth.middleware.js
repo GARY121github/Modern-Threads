@@ -5,7 +5,7 @@ const authenticate = (req, res, next) => {
         next();
     } else {
         // Token is not present, redirect to the login page
-        console.log("user is not verified!!");
+        req.flash('error' , "you need to login first");
         res.cookie('previousUrl', req.originalUrl);
         res.redirect('/auth/login');
     }

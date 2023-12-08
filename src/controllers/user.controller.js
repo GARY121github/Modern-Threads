@@ -55,7 +55,7 @@ export const registerUser = async (req, res) => {
 };
 
 export const showSignInPage = (req, res) => {
-    req.flash('success', "Welcome to login page!!");
+    req.flash('success', "Welcome to signup page!!");
     res.render('auth/signIn');
 };
 
